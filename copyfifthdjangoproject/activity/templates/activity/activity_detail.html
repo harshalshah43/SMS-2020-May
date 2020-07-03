@@ -1,0 +1,29 @@
+{% extends 'activity/base.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col s12 m6 l12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Title: {{object.title}}</span>
+          <span class="card-title">Author: <a href="#">{{object.author}}</a></span>
+          <span class="card-title">Posted On: {{object.date_posted}}</span>
+          <span class="card-title">Status: {{object.currently_active}}</span>
+          <p>Content: {{object.content}} </p>
+          <a href="{{object.pdf.url}}">Content: {{object.pdf}} </p></a>
+        </div>
+        <div class="card-action">
+          {% if user.is_authenticated and teacher_is_staff %}
+          <a href="{% url 'activity-answer-list' object.id %}">View Submitted Answers for this activity{{object.id}}</a>
+          <a href="{% url 'activity-list' %}">Go back to the List</a>
+          {% elif user.is_authenticated and student_is_current_student %}
+          <a href="{% url 'submit-answer' object.id %}">Submit Answer to Activity no{{object.id}}</a>
+          <a href="{% url 'activity-home' %}">Go back to the List</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

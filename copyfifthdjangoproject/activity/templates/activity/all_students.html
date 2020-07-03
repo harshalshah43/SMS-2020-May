@@ -1,0 +1,26 @@
+{% extends 'activity/base.html' %}
+{% block content %}
+
+{% for post in posts %}
+<div class="row">
+    <div class="col s12 m6 l12">
+      <div class="card blue-grey darken-1">
+        
+        <div class="card-content white-text">
+          <span class="card-title">Student Name: {{post.student.username}}</span>
+          <span class="card-title" >Course Taken: <a href ="#">{{post.branch}}</a></span>
+          <span class="card-title">Assignments Accepted: {{post.assignments_accepted}}</span>
+          <span class="card-title">Status: {{post.is_current_student}}</span>
+          
+        </div>
+        <div class="card-action">
+          <a href="#">View Details</a>
+          <a href="{% url 'student-answer-list-by-teachers' post.id %}">View Answers by {{post.student.username}}</a>
+          </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  
+{% endblock content %}

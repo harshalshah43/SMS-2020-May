@@ -1,0 +1,32 @@
+{% extends 'activity/base.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col s12 m6 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">My Answers</span>
+          
+        </div>
+        <div class="card-action">
+          <a href="{% url 'student-answer-list' %}">View All My Answers</a>
+          </div>
+      </div>
+    </div>
+    <div class="col s6 m6 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">My Score Card</span>
+          
+        </div>
+        <div class="card-action">
+          <a href="{% url 'student-score-card' %}">View Score Card</a>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+   
+            
+           
+   {% if user.username %}
+    <title>{{user.username}} Page</title>
+    {% else %}
+    <title>Home Page</title>
+   {% endif %}
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+           
+      
+  
+</head>
+<body>
+  <header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Student Management System</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{% url 'activity-home' %}">Home</a></li>
+        <li><a href="{% url 'activity-about' %}">About</a></li>
+        
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if user.is_authenticated and teacher_is_staff %}
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'activity-create' %}">New Activity</a></li>
+            <li><a href="{% url 'activity-create' %}">Logged in as: {{user.username }}</a></li>
+            <li>Status : Faculty</li>
+            <li><a href="{% url 'faculty-logout' %}">Log Out</a></li>
+        {% elif user.is_authenticated and student_is_current_student %}
+            <li><a href="{% url 'student-dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'activity-create' %}">Logged in as: {{user.username }}</a></li>
+            <li>Status : Student</li>
+            <li><a href="{% url 'student-logout' %}">Log Out</a></li>
+        {% else %}
+        
+        <li><a href="{% url 'faculty-login' %}">Faculty Login</a></li>
+        <li><a href="{% url 'student-login' %}">Student Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
+{% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+  {% block content %}
+  {% endblock %}
+    
+</body>
+</html>
